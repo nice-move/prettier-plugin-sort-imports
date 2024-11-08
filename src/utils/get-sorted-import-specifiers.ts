@@ -1,7 +1,22 @@
-import { type ImportDeclaration } from '@babel/types';
+import type {
+    ImportDeclaration,
+    ImportDefaultSpecifier,
+    ImportNamespaceSpecifier,
+    ImportSpecifier,
+} from '@babel/types';
 
 import type { PluginConfig } from '../../types';
 import { naturalSort, naturalSortCaseSensitive } from '../natural-sort';
+
+function getName(
+    item: ImportSpecifier | ImportDefaultSpecifier | ImportNamespaceSpecifier,
+): string {
+    return item.type === 'ImportSpecifier'
+        ? item.imported.type === 'Identifier'
+            ? item.imported.name
+            : item.imported.value
+        : item.local.name;
+}
 
 /**
  * This function returns import nodes with alphabetically sorted module
@@ -33,7 +48,15 @@ export const getSortedImportSpecifiers = (
         const sortFn = importOrderCaseSensitive
             ? naturalSortCaseSensitive
             : naturalSort;
-        return sortFn(a.local.name, b.local.name);
+
+        const A = getName(a);
+        const B = getName(b);
+
+        if (A === B) {
+            return sortFn(a.local.name, b.local.name);
+        }
+
+        return sortFn(A, B);
     });
     return node;
 };

@@ -24,6 +24,8 @@ import BY from 'BY';
 import Ba from 'Ba';
 import XY from 'XY';
 import Xa from 'Xa';
+import Xa2 from 'Xa/2';
+import Xa3 from 'Xa-2';
 import "se2";
 `;
 
@@ -53,6 +55,8 @@ test('it returns all sorted nodes, preserving the order side effect nodes', () =
         'BY',
         'x',
         'Xa',
+        'Xa/2',
+        'Xa-2',
         'XY',
         'se2',
         '',
@@ -79,6 +83,8 @@ test('it returns all sorted nodes, preserving the order side effect nodes', () =
         ['BY'],
         ['x'],
         ['Xa'],
+        ['Xa2'],
+        ['Xa3'],
         ['XY'],
         [],
     ]);
