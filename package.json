@@ -1,5 +1,5 @@
 {
-    "name": "@ianvs/prettier-plugin-sort-imports",
+    "name": "@nice-move/prettier-plugin-sort-imports",
     "private": false,
     "version": "4.5.1",
     "description": "A prettier plugins to sort imports in provided RegEx order",
